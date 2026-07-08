@@ -1,0 +1,9 @@
+flask
+tensorflow
+librosa
+numpy
+scikit-learn
+soundfile
+matplotlib
+tqdm
+werkzeug

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Speech Emotion Recognition</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🎙️</span>
+      <span class="brand-text">EmotionWave</span>
+    </div>
+    <span class="tagline">Speech Emotion Recognition &middot; CNN-LSTM + MFCC</span>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>Hear the emotion behind the voice.</h1>
+      <p>Upload an audio clip or record yourself speaking — the model extracts
+         MFCC features and classifies the emotion using a CNN-LSTM network
+         trained on RAVDESS / TESS / EMO-DB.</p>
+    </section>
+
+    <section class="panel">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="upload">📁 Upload File</button>
+        <button class="tab-btn" data-tab="record">🎤 Record Audio</button>
+      </div>
+
+      <div class="tab-content active" id="upload-tab">
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept=".wav,.mp3,.ogg,.m4a" hidden />
+          <div class="dropzone-inner">
+            <span class="dropzone-icon">⬆️</span>
+            <p><strong>Click to browse</strong> or drag & drop an audio file</p>
+            <span class="dropzone-hint">WAV, MP3, OGG, M4A — max 16MB</span>
+          </div>
+        </div>
+        <div class="file-info" id="fileInfo" style="display:none;">
+          <span id="fileName"></span>
+          <button id="clearFile" class="link-btn">Remove</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="record-tab">
+        <div class="record-box">
+          <button id="recordBtn" class="record-btn">
+            <span id="recordIcon">🎤</span>
+          </button>
+          <p id="recordStatus">Tap to start recording</p>
+          <div id="recordTimer" class="record-timer">00:00</div>
+          <audio id="recordedAudio" controls style="display:none;"></audio>
+        </div>
+      </div>
+
+      <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Emotion</button>
+    </section>
+
+    <section class="result-section" id="resultSection" style="display:none;">
+      <div class="result-card">
+        <div class="result-main">
+          <span class="result-emoji" id="resultEmoji">🎙️</span>
+          <div>
+            <h2 id="resultEmotion">—</h2>
+            <p id="resultConfidence">Confidence: —</p>
+          </div>
+        </div>
+        <div class="scores" id="scoresContainer"></div>
+      </div>
+    </section>
+
+    <section class="loading" id="loadingSection" style="display:none;">
+      <div class="spinner"></div>
+      <p>Analyzing speech signal &amp; extracting MFCC features…</p>
+    </section>
+
+    <section class="error-box" id="errorBox" style="display:none;"></section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Built with Flask, TensorFlow/Keras & Librosa &middot; MFCC + CNN-LSTM Speech Emotion Recognition</p>
+  </footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
